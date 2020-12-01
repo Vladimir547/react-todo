@@ -1,0 +1,23 @@
+.todo__wrapper {
+    background-color: #ebecf0;
+    padding: 10px;
+    border-radius: 5px;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    min-height: 88px;
+}
+.todo__title {
+    display: flex;
+    justify-content: space-between;
+}
+.todo__add-show {
+    margin-top: 10px;
+    display: block;
+}
+.todo__add-none {
+    display: none;
+}
+.add__btn {
+    color: #000000;
+}

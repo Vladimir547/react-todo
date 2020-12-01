@@ -1,0 +1,24 @@
+.task {
+    width: 100%;
+    padding: 10px 5px;
+    margin-top: 10px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.task__icons i {
+    cursor: pointer;
+}
+.task__icons i + i{
+    margin-left: 3px;
+}
+.hide {
+    display: none;
+}
+.task:hover {
+    background-color: #8b8d94;
+}
+.task__icons i:hover {
+    color: #c3c4c7;
+}

@@ -1,0 +1,35 @@
+.todo__form {
+    margin-top: 10px;
+}
+.todo__form-none {
+    display: none;
+}
+.todo__form-show {
+    display: block;
+}
+.form__title, .form__description {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+}
+.form__description {
+    margin-top: 10px;
+    resize: none;
+}
+.submit__align {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+.form__submit {
+    width: 40%;
+    padding: 10px;
+    background-color: chartreuse;
+    border: none;
+    border-radius: 10px;
+}
+.submit__align i {
+    margin-left: 20px;
+    cursor: pointer;
+}
