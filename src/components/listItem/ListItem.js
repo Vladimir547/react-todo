@@ -26,7 +26,7 @@ const ListItem = (props) => {
     };
     return (
         <div className="task" data-id={props.itemText.id}>
-            <p className="title-text">{props.itemText.title} {props.itemText.id}</p>
+            <p className="title-text">{props.itemText.title}</p>
             <p className="hide">{props.itemText.discription}</p>
             <div className="task__icons">
                 <i className="icon-view-show" onClick={ (e) => showTask(e) }></i>
