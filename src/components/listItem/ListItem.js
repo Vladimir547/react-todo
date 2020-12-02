@@ -1,12 +1,10 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { actionShowMadal, actionShowModalEdit, actionShowModalView, actionSetTask, actionMoveItem } from '../../actions/actions';
 import './ListItem.css';
 
 const ListItem = (props) => {
-    const isShow = useSelector((state) => state.isModalShow );
-    const currentTask = useSelector((state) => state.currentTask );
     const dispatch = useDispatch();
     const deleted = props.whichState !== 'delete';
     const wrapper =  props.whichState;

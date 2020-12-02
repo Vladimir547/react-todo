@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from 'react';
+import React,{ useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { actionCloseModal } from '../../actions/actions';
@@ -6,15 +6,20 @@ import './modal.css';
 
 const Modal = () => {
     const dispatch = useDispatch();
-    const isShow = useSelector((state) => state.isModalShow );
     const isEdit = useSelector((state) => state.isEdit);
     const isView = useSelector((state) => state.isView);
     const currentTask = useSelector((state) => state.currentTask);
-    const [ index, setIndex ] = useState(currentTask[0]);
-    const [ wrapper, setWrapper ] = useState(currentTask[1]);
-    const task = useSelector((state) => state[wrapper][index]);
-    const [ title, setTitle ] = useState(task.title);
-    const [ description, setDescription ] = useState(task.discription);
+    const index = currentTask[0];
+    const wrapper = currentTask[1];
+    const task = useSelector((state) => {
+        return state[wrapper].filter((item) => {
+            if (Number(index) === item.id) {
+                return item;
+            }
+        });
+    });
+    const [ title, setTitle ] = useState(task[0].title);
+    const [ description, setDescription ] = useState(task[0].discription);
     const closeModal = (e) => {
         e.preventDefault();
         setTitle('');
@@ -23,7 +28,7 @@ const Modal = () => {
     };
     const editTask = (e) => {
         e.preventDefault();
-        dispatch({type: 'EDIT', payload: {wrapper: wrapper, num: index, newItem: {id: task.id, title: title, discription: description}}});
+        dispatch({type: 'EDIT', payload: {wrapper: wrapper, num: index, newItem: {id: task[0].id, title: title, discription: description}}});
         setTitle('');
         setDescription('');
         dispatch(actionCloseModal());

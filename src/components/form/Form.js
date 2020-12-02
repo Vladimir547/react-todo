@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { actionAdd } from '../../actions/actions';
 
 import './Form.css';
@@ -8,7 +8,7 @@ import './Form.css';
 const Form = (props) => {
     const dispatch = useDispatch();
     const todosName = props.whichState;
-    const todo = useSelector((state) => state);
+    //const todo = useSelector((state) => state);
     const [ todoTitle, setTodoTitle ] = useState('');
     const [ todoDescription, setTodoDescription ] = useState('');
     const closeForm = (e) => {
@@ -18,7 +18,6 @@ const Form = (props) => {
     };
     const addTask = (e) => {
         props.showForm(e);
-        console.log(todo);
         dispatch(actionAdd({ discription: todoDescription, title: todoTitle, which: todosName}));
         setTodoTitle('');
         setTodoDescription('');
