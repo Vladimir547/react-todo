@@ -5,6 +5,7 @@ const actionTypes = {
     CLOSE_MODAL: 'CLOSE_MODAL',
     VIEW_TASK: 'VIEW_TASK',
     SET_TASK: 'SET_TASK',
+    MOVE_ITEM: 'MOVE_ITEM',
 };
 
 export function actionAdd ( obj ) {
@@ -38,6 +39,15 @@ export function actionSetTask ( num, name ) {
     return {
         type: actionTypes.SET_TASK,
         payload: [num, name]
+    };
+}
+export function actionMoveItem ( wrapper, number ) {
+    return {
+        type: actionTypes.MOVE_ITEM,
+        payload: {
+            cont: wrapper,
+            num: number
+        }
     };
 }
 

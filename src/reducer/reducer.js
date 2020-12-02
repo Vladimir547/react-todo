@@ -14,8 +14,8 @@ function reducer ( state = initialState, action) {
         case 'ADD': 
             return {
                 ...state,
-                todo: [...state.todo, {
-                    id: state.todo.length > 0 ? state.todo[state.todo.length - 1].id + 1 : 0,
+                [action.payload.which]: [...state[action.payload.which], {
+                    id: state[action.payload.which].length > 0 ? state[action.payload.which][state[action.payload.which].length - 1].id + 1 : 0,
                     title: action.payload.title,
                     discription: action.payload.discription
                 }],
@@ -48,13 +48,49 @@ function reducer ( state = initialState, action) {
                 currentTask: [action.payload[0], action.payload[1]],
             };
         case 'EDIT':
-                let stateTodo = state[action.payload.wrapper];
-                const cloneTodo = [...stateTodo];
-                cloneTodo.splice(action.payload.num, 1, action.payload.newItem);
-                return {
-                    ...state,
-                    [action.payload.wrapper]: cloneTodo,
-                };
+            let stateTodo = state[action.payload.wrapper];
+            const cloneTodo = stateTodo.map((item) => {
+                if (item.id === action.payload.newItem.id) {
+                    return action.payload.newItem;
+                } else {
+                    return item;
+                }
+            });
+            return {
+                ...state,
+                [action.payload.wrapper]: cloneTodo,
+            };
+        case 'MOVE_ITEM':
+            let nextWrapper = null;
+            const cloneWrap = [...state[action.payload.cont]];
+            const currantEl = cloneWrap.filter((item) => {
+                if (item.id === Number(action.payload.num)) {
+                    return item;
+                }
+            });
+            const newArray = cloneWrap.filter((item) => {
+                if (item.id !== Number(action.payload.num)) {
+                    return item;
+                }
+            });
+            if (action.payload.cont === 'todo') {
+                nextWrapper = 'doing';
+            }
+            if (action.payload.cont === 'doing') {
+                nextWrapper = 'done';
+            }
+            if (action.payload.cont === 'done') {
+                nextWrapper = 'todo';
+            }
+            if (action.payload.cont === 'delete') {
+                nextWrapper = 'todo';
+            }
+            currantEl[0].id = state[nextWrapper].length > 0 ? state[nextWrapper][state[nextWrapper].length - 1]. id + 1 : 0;
+            return {
+                ...state,
+                [action.payload.cont]: [...newArray],
+                [nextWrapper]: [...state[nextWrapper], ...currantEl]
+            };
         default:
             return state;
     }

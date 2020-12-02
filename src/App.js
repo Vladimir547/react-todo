@@ -9,6 +9,9 @@ function App() {
   return (
     <div className="App">
       <List classProps='todo'/>
+      <List classProps='doing'/>
+      <List classProps='done'/>
+      <List classProps='delete'/>
       { isShow && <Modal />}
     </div>
   );

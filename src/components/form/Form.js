@@ -18,6 +18,7 @@ const Form = (props) => {
     };
     const addTask = (e) => {
         props.showForm(e);
+        console.log(todo);
         dispatch(actionAdd({ discription: todoDescription, title: todoTitle, which: todosName}));
         setTodoTitle('');
         setTodoDescription('');
