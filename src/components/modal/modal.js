@@ -1,7 +1,7 @@
 import React,{ useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { actionCloseModal } from '../../actions/actions';
+import { actionCloseModal, actionEditTask } from '../../actions/actions';
 import './modal.css';
 
 const Modal = () => {
@@ -28,7 +28,7 @@ const Modal = () => {
     };
     const editTask = (e) => {
         e.preventDefault();
-        dispatch({type: 'EDIT', payload: {wrapper: wrapper, num: index, newItem: {id: task[0].id, title: title, discription: description}}});
+        dispatch(actionEditTask({wrapper: wrapper, num: index, newItem: {id: task[0].id, title: title, discription: description}}));
         setTitle('');
         setDescription('');
         dispatch(actionCloseModal());

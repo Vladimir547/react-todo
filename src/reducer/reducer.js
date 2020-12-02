@@ -91,6 +91,24 @@ function reducer ( state = initialState, action) {
                 [action.payload.cont]: [...newArray],
                 [nextWrapper]: [...state[nextWrapper], ...currantEl]
             };
+        case 'DELETE':
+            const cloneWrapForDel = [...state[action.payload.cont]];
+            const currantElForDel = cloneWrapForDel.filter((item) => {
+                if (item.id === Number(action.payload.num)) {
+                    return item;
+                }
+            });
+            const newArrayForWrap = cloneWrapForDel.filter((item) => {
+                if (item.id !== Number(action.payload.num)) {
+                    return item;
+                }
+            });
+            currantElForDel[0].id = state.delete.length > 0 ? state.delete[state.delete.length - 1]. id + 1 : 0;
+            return {
+                ...state,
+                [action.payload.cont]: [...newArrayForWrap],
+                delete: [...state.delete, ...currantElForDel]
+            };
         default:
             return state;
     }

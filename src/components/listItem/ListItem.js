@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { actionShowMadal, actionShowModalEdit, actionShowModalView, actionSetTask, actionMoveItem } from '../../actions/actions';
+import { actionShowMadal, actionShowModalEdit, actionShowModalView, actionSetTask, actionMoveItem, actionDeleteTask } from '../../actions/actions';
 import './ListItem.css';
 
 const ListItem = (props) => {
@@ -21,6 +21,9 @@ const ListItem = (props) => {
     const moveItem = (e) => {
         dispatch(actionMoveItem( wrapper, e.target.closest('.task').dataset.id ));
     };
+    const deleteTask = (e) => {
+        dispatch(actionDeleteTask( wrapper, e.target.closest('.task').dataset.id ));
+    };
     return (
         <div className="task" data-id={props.itemText.id}>
             <p className="title-text">{props.itemText.title} {props.itemText.id}</p>
@@ -30,7 +33,7 @@ const ListItem = (props) => {
                 <i className="icon-point-right" onClick={(e) => moveItem(e)}></i>
                 <i className="icon-pencil" onClick={ (e) => editTask(e) }></i>
                 {
-                    deleted && <i className="icon-close"></i>
+                    deleted && <i className="icon-close" onClick={ (e) => deleteTask(e) }></i>
                 }
             </div>
         </div>
