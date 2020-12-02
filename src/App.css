@@ -7,3 +7,17 @@
   padding-top: 10px;
   justify-content: space-between;
 }
+
+.reset-btn{
+  position: fixed;
+  top : 95vh;
+  border-radius: 10px;
+  background: red;
+  border: none;
+  padding: 5px;
+  color:white;
+  font-size: 17px;
+}
+.reset-btn:hover{
+ background: orangered;
+}
