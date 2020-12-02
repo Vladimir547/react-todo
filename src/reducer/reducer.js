@@ -11,7 +11,17 @@ const initialState = {
 
 function reducer ( state = initialState, action) {
     switch (action.type) {
+        case 'ADD_FROM_STORAGE':
+            return {
+                ...state,
+                [action.payload[1]]: action.payload[0]
+            };
         case 'ADD': 
+                localStorage.setItem(action.payload.which, JSON.stringify([...state[action.payload.which], {
+                    id: state[action.payload.which].length > 0 ? state[action.payload.which][state[action.payload.which].length - 1].id + 1 : 0,
+                    title: action.payload.title,
+                    discription: action.payload.discription
+                }]));
             return {
                 ...state,
                 [action.payload.which]: [...state[action.payload.which], {
@@ -56,6 +66,7 @@ function reducer ( state = initialState, action) {
                     return item;
                 }
             });
+            localStorage.setItem(action.payload.wrapper, JSON.stringify(cloneTodo));
             return {
                 ...state,
                 [action.payload.wrapper]: cloneTodo,
@@ -86,6 +97,8 @@ function reducer ( state = initialState, action) {
                 nextWrapper = 'todo';
             }
             currantEl[0].id = state[nextWrapper].length > 0 ? state[nextWrapper][state[nextWrapper].length - 1]. id + 1 : 0;
+            localStorage.setItem(action.payload.cont, JSON.stringify([...newArray]))
+            localStorage.setItem(nextWrapper, JSON.stringify([...state[nextWrapper], ...currantEl]));
             return {
                 ...state,
                 [action.payload.cont]: [...newArray],
@@ -104,6 +117,8 @@ function reducer ( state = initialState, action) {
                 }
             });
             currantElForDel[0].id = state.delete.length > 0 ? state.delete[state.delete.length - 1]. id + 1 : 0;
+            localStorage.setItem(action.payload.cont, JSON.stringify([...newArrayForWrap]))
+            localStorage.setItem('delete', JSON.stringify([...state.delete, ...currantElForDel]));
             return {
                 ...state,
                 [action.payload.cont]: [...newArrayForWrap],

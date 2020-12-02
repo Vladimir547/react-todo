@@ -1,15 +1,22 @@
-import React,{ useState } from 'react';
-import { useSelector } from 'react-redux';
+import React,{ useState, useEffect } from 'react';
+import { useSelector,useDispatch } from 'react-redux';
 
 import Form from '../../components/form/Form';
 import ListItem from '../../components/listItem/ListItem';
 import './List.css';
 
 const List = (props) => {
+    const dispatch = useDispatch();
     const tasks = useSelector((state) => state[props.classProps]);
     const [ formClass, setFormClass ] = useState('todo__form-none');
     const [ todoAddClass, setTodoAddClass ] = useState('todo__add-show')
     const isntDelete = props.classProps !== 'delete';
+    useEffect(() => {
+        const arrFromStorage = JSON.parse(localStorage.getItem(props.classProps))
+        if (tasks.length === 0 && arrFromStorage !== null) {
+            dispatch({type: 'ADD_FROM_STORAGE', payload: [arrFromStorage, props.classProps]});
+        }
+    }, []);
     const showForm = (e) => {
         e.preventDefault();
         if (formClass === 'todo__form-none' && todoAddClass === 'todo__add-show') {
